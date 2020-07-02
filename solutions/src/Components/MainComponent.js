@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useState } from "react";
 import { Button } from "./Generic/Button";
+
 const componentList = {
   myShifts: {
     name: "My Shifts",
@@ -29,7 +30,6 @@ export const MainComponent = () => {
           onClick={() => openComponent("availableShifts")}
         />
       </div>
-
       <div className="card listItem">
         <Suspense fallback={<div>Loading....</div>}>
           <Component />

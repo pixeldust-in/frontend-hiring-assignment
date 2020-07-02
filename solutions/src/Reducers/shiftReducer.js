@@ -2,6 +2,7 @@ import {
   GET_SHIFT_DETAILS,
   CANCEL_SHIFT,
   BOOk_SHIFT,
+  ERROR_SHIFT,
 } from "../API/ActionTypes";
 
 const shiftReducer = (state = {}, action) => {
@@ -9,19 +10,20 @@ const shiftReducer = (state = {}, action) => {
     case GET_SHIFT_DETAILS:
       return { ...state, allshiftData: action.payload };
     case BOOk_SHIFT:
-      return [
+      return {
         ...state,
-        {
-          bookedShift: [],
-        },
-      ];
+        bookedShift: action.payload,
+      };
     case CANCEL_SHIFT:
-      return [
+      return {
         ...state,
-        {
-          cancelledShift: [],
-        },
-      ];
+        cancelledShift: action.payload,
+      };
+    case ERROR_SHIFT:
+      return {
+        ...state,
+        errorShift: action.payload.data,
+      };
     default:
       return state;
   }

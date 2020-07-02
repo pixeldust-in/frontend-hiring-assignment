@@ -12,6 +12,16 @@ const App = (props) => {
     bookShift: (shiftId) => props.bookShift(shiftId),
     cancelShift: (shiftId) => props.cancelShift(shiftId),
     shiftList: props.shiftList,
+    myShifts:
+      props.shiftList && props.shiftList.filter((shift) => shift.booked),
+    location: [
+      ...new Set(
+        props.shiftList &&
+          props.shiftList.map((data) => {
+            return data.area;
+          })
+      ),
+    ],
   };
   useEffect(() => {
     props.getShiftDetails();
@@ -26,6 +36,9 @@ const App = (props) => {
 };
 const mapStateToProps = (state) => ({
   shiftList: state.shiftReducer.allshiftData,
+  bookedShift: state.shiftReducer.bookedShift,
+  cancelledShift: state.shiftReducer.cancelledShift,
+  errorShift: state.shiftReducer.errorShift,
 });
 const mapDispatchToProps = {
   getShiftDetails: ActionCreater.getShiftDetails,

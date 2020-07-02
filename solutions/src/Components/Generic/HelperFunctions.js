@@ -31,4 +31,21 @@ const getDate = (unixTimestamp) => {
   else if (date === today + 1) return "Tomorrow";
   else return `${month} ${date}`;
 };
-export { getTime, getDate };
+
+const groupBy = (shiftData, key) => {
+  return shiftData.reduce((data, obj) => {
+    (data[getDate(obj[key])] = data[getDate(obj[key])] || []).push(obj);
+    return data;
+  }, {});
+};
+
+const sortArray = (array) => {
+  return array.sort((a, b) => {
+    return a.startTime - b.startTime;
+  });
+};
+
+const isButtonDisabled = (unixTimestamp) => {
+  return unixTimestamp < new Date().getTime();
+};
+export { getTime, getDate, groupBy, sortArray, isButtonDisabled };

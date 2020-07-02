@@ -59,10 +59,69 @@
 .shiftTime {
   width: 48%;
   text-align: left;
+  display: grid;
 }
 .shiftStatus {
+  font-weight: bold;
   width: 28%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4f6c92;
+}
+.overlap {
+  color: #e2006a;
+}
+.leftPanel {
+  width: 24%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .shiftbutton {
-  width: 24%;
+  border-radius: 54px;
+  background-color: #f7f8fb;
+  width: 77px;
+  border: 1px solid;
+}
+.shiftbutton:focus {
+  outline: none;
+}
+.bookButton {
+  color: #16a64d;
+  border-color: #55cb82;
+}
+.bookButton:hover {
+  background-color: #16a64d;
+  color: #f7f8fb;
+  border-color: #55cb82;
+}
+.cancelButton {
+  color: #e2006a;
+  border-color: #fe93b3;
+}
+.cancelButton:hover {
+  background-color: #e2006a;
+  color: #f7f8fb;
+  border-color: #fe93b3;
+}
+.disabled {
+  color: #eed2df;
+  border-color: #eed2df;
+}
+.disabled:hover {
+  color: #eed2df;
+  border-color: #eed2df;
+  background-color: #f7f8fb;
+}
+.headerInfo {
+  font-weight: bold;
+  text-align: left;
+  color: #4f6c92;
+}
+.time {
+  color: #4f6c92;
+}
+.subInfo {
+  color: #a4b8d3;
 }

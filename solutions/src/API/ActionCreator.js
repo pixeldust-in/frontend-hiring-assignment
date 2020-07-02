@@ -15,8 +15,8 @@ export const getShiftDetails = () => {
       .then((response) => {
         dispatch(data(ActionTypes.GET_SHIFT_DETAILS, response.data));
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        dispatch(data(ActionTypes.ERROR_SHIFT, error));
       });
   };
 };
@@ -27,8 +27,8 @@ export const bookShift = (shiftId) => {
       .then((response) => {
         dispatch(data(ActionTypes.BOOk_SHIFT, response.data));
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        dispatch(data(ActionTypes.ERROR_SHIFT, error));
       });
   };
 };
@@ -39,8 +39,8 @@ export const cancelShift = (shiftId) => {
       .then((response) => {
         dispatch(data(ActionTypes.CANCEL_SHIFT, response.data));
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        dispatch(data(ActionTypes.ERROR_SHIFT, error));
       });
   };
 };
