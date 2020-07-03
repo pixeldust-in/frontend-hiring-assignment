@@ -32,9 +32,11 @@ const getDate = (unixTimestamp) => {
   else return `${month} ${date}`;
 };
 
-const groupBy = (shiftData, key) => {
+const groupBy = (shiftData, startTime, endTime) => {
   return shiftData.reduce((data, obj) => {
-    (data[getDate(obj[key])] = data[getDate(obj[key])] || []).push(obj);
+    if (new Date().getTime() < obj[endTime])
+      (data[getDate(obj[startTime])] =
+        data[getDate(obj[startTime])] || []).push(obj);
     return data;
   }, {});
 };

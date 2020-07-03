@@ -8,15 +8,17 @@ const data = (actionType, data) => ({
   payload: data,
 });
 
-export const getShiftDetails = () => {
+export const getShiftDetails = (callback) => {
   return (dispatch) => {
     axiosCall
       .get(`shifts`)
       .then((response) => {
         dispatch(data(ActionTypes.GET_SHIFT_DETAILS, response.data));
+        callback();
       })
       .catch((error) => {
         dispatch(data(ActionTypes.ERROR_SHIFT, error));
+        callback();
       });
   };
 };

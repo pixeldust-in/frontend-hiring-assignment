@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import * as ActionCreater from "./API/ActionCreator";
-import "./App.css";
-import { MainComponent } from "./Components/MainComponent";
 
+import * as ActionCreater from "./API/ActionCreator";
+
+import MainComponent from "./Components/MainComponent";
+import Spinner from "./Components/Generic/Spinner";
+
+import "./App.css";
 export const ShiftContext = React.createContext(null);
 
 const App = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   let contextData = {
-    getShiftDetails: () => props.getShiftDetails(),
-    bookShift: (shiftId) => props.bookShift(shiftId),
-    cancelShift: (shiftId) => props.cancelShift(shiftId),
     shiftList: props.shiftList,
     myShifts:
       props.shiftList && props.shiftList.filter((shift) => shift.booked),
@@ -24,25 +25,25 @@ const App = (props) => {
     ],
   };
   useEffect(() => {
-    props.getShiftDetails();
+    setIsLoading(true);
+    props.getShiftDetails(() => setIsLoading(false));
   }, []);
-  return (
-    <div className="App">
+  let helperFunction = () => {
+    return isLoading ? (
+      <Spinner message={"Loading App..."} />
+    ) : (
       <ShiftContext.Provider value={contextData}>
         <MainComponent />
       </ShiftContext.Provider>
-    </div>
-  );
+    );
+  };
+  return <div className="App">{helperFunction()}</div>;
 };
 const mapStateToProps = (state) => ({
   shiftList: state.shiftReducer.allshiftData,
-  bookedShift: state.shiftReducer.bookedShift,
-  cancelledShift: state.shiftReducer.cancelledShift,
   errorShift: state.shiftReducer.errorShift,
 });
 const mapDispatchToProps = {
   getShiftDetails: ActionCreater.getShiftDetails,
-  bookShift: ActionCreater.bookShift,
-  cancelShift: ActionCreater.cancelShift,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
