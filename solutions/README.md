@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Shift Tracker
+## Shift booking application
 
 In the project directory, you can run:
 
