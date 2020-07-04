@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, useState } from "react";
+
 import { Button } from "./Generic/Button";
 import Spinner from "./Generic/Spinner";
+import Filter from "./Card/Filter";
 
 const componentList = {
   myShifts: {
@@ -12,15 +14,21 @@ const componentList = {
     component: lazy(() => import("./Card/AvailableShifts")),
   },
 };
-const MainComponent = () => {
-  let [Component, setComponent] = useState(componentList.myShifts.component);
-  let [myShiftsActive, setMyShiftsActive] = useState(true);
-  let [availableShiftsActive, setAvailableShiftsActive] = useState(false);
+
+const MainComponent = (props) => {
+  const initialFilter = { date: "", location: "" };
+  const [Component, setComponent] = useState(componentList.myShifts.component);
+  const [filterValues, setFilterValues] = useState(initialFilter);
+  const [myShiftsActive, setMyShiftsActive] = useState(true);
+  const [availableShiftsActive, setAvailableShiftsActive] = useState(false);
+
   const openComponent = (name) => {
     setMyShiftsActive(name === "myShifts");
     setAvailableShiftsActive(name === "availableShifts");
+    setFilterValues(initialFilter);
     setComponent(componentList[name].component);
   };
+
   return (
     <div>
       <div className="btn-group">
@@ -43,7 +51,17 @@ const MainComponent = () => {
         <Suspense
           fallback={<Spinner componentOverlayCSS={"componentOverlay"} />}
         >
-          <Component />
+          <Filter
+            data={props}
+            filterValues={filterValues}
+            setFilterValues={(value) => {
+              setFilterValues(value);
+            }}
+          />
+          <Component
+            filterValues={filterValues}
+            parentProps={props.parentProps}
+          />
         </Suspense>
       </div>
     </div>

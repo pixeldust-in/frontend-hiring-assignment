@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import * as ActionCreater from "../../API/ActionCreator";
 
-import { ShiftContext } from "../../App";
 import { Button } from "../Generic/Button";
 import { getTime, isButtonDisabled } from "../Generic/HelperFunctions";
 
@@ -29,7 +28,9 @@ const getButtonProps = (
 ) => {
   let overlap = isOverlapped(data, myShifts),
     passed = isButtonDisabled(startTime);
-  let disabledStatus = booked ? "" : (passed || overlap) && "disabled";
+  let disabledStatus = booked
+    ? passed && "disabled"
+    : (passed || overlap) && "disabled";
   let obj = {
     buttonclassName: `bookButton ${disabledStatus}`,
     buttonlabel: "Book",
@@ -39,7 +40,7 @@ const getButtonProps = (
       getShiftDetails(() => setIsLoading(false));
     },
     statusClass: "",
-    isDisabled: booked ? false : overlap || passed,
+    isDisabled: booked ? passed : overlap || passed,
   };
   if (booked) {
     obj.buttonclassName = `cancelButton ${disabledStatus}`;
@@ -60,7 +61,7 @@ const getButtonProps = (
 const ShiftDetails = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { id, startTime, endTime, booked, area } = props.shiftData;
-  const { myShifts = [] } = React.useContext(ShiftContext);
+  const { myShifts = [] } = props.parentProps;
   let {
     buttonclassName,
     buttonlabel,
@@ -102,13 +103,11 @@ const ShiftDetails = (props) => {
     </li>
   );
 };
-const mapStateToProps = (state) => ({
-  bookedShift: state.shiftReducer.bookedShift,
-  cancelledShift: state.shiftReducer.cancelledShift,
-});
+
 const mapDispatchToProps = {
   getShiftDetails: ActionCreater.getShiftDetails,
   bookShift: ActionCreater.bookShift,
   cancelShift: ActionCreater.cancelShift,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ShiftDetails);
+
+export default connect(null, mapDispatchToProps)(ShiftDetails);

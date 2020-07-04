@@ -32,7 +32,7 @@ const getDate = (unixTimestamp) => {
   else return `${month} ${date}`;
 };
 
-const groupBy = (shiftData, startTime, endTime) => {
+const groupByTime = (shiftData, startTime, endTime) => {
   return shiftData.reduce((data, obj) => {
     if (new Date().getTime() < obj[endTime])
       (data[getDate(obj[startTime])] =
@@ -42,12 +42,16 @@ const groupBy = (shiftData, startTime, endTime) => {
 };
 
 const sortArray = (array) => {
-  return array.sort((a, b) => {
-    return a.startTime - b.startTime;
-  });
+  return (
+    array &&
+    array.sort((a, b) => {
+      return a.startTime - b.startTime;
+    })
+  );
 };
 
 const isButtonDisabled = (unixTimestamp) => {
   return unixTimestamp < new Date().getTime();
 };
-export { getTime, getDate, groupBy, sortArray, isButtonDisabled };
+
+export { getTime, getDate, groupByTime, sortArray, isButtonDisabled };

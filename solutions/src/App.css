@@ -159,8 +159,6 @@
   border-color: #eed2df;
 }
 .disabled:hover {
-  color: #eed2df;
-  border-color: #eed2df;
   background-color: #f7f8fb;
 }
 .headerInfo {
@@ -178,6 +176,61 @@
 .shiftInfo {
   font-size: 0.75em;
   color: #a4b8d3;
+  display: inline-flex;
+  vertical-align: bottom;
+}
+.filterDiv {
+  height: 2em;
+  border: inherit;
+  display: flex;
+  padding: 0.1em;
+}
+.filterLabel {
+  width: 19%;
+  padding-left: 1em;
+  text-align: left;
+  font-size: 1em;
+  font-style: oblique;
+  color: #4f6c92;
+}
+.filterDropdown {
+  width: 29%;
+}
+.filterDropdown .dropdown {
+  width: 81%;
+  border-color: #d8d8d8;
+  border-radius: 4px;
+  color: #4f6c92;
+}
+.filterDropdown .dropdown:hover {
+  border-color: #4f6c92;
+}
+.filterDropdown .dropdown:active {
+  border-color: #4f6c92;
+}
+.filterClearButton {
+  width: 19%;
+}
+.clearButton {
+  border-radius: 7px;
+  background-color: #f7f8fb;
+  width: 58px;
+  border: 1px solid;
+  color: #4f6c92;
+}
+.clearButton:focus {
+  outline: none;
+}
+.clearButton:hover {
+  color: #f7f8fb;
+  background-color: #4f6c92;
+}
+.noData {
+  color: #4f6c92;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 @media (min-width: 801px) and (max-width: 1100px) {
   .listItem {

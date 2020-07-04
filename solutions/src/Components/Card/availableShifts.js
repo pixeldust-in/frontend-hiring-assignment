@@ -1,36 +1,74 @@
-import React, { useContext } from "react";
-import { ShiftContext } from "../../App";
+import React from "react";
 import ShiftDetails from "./ShiftDetails";
-import { groupBy, sortArray } from "../Generic/HelperFunctions";
+import { groupByTime, sortArray } from "../Generic/HelperFunctions";
 
-const AvailableShifts = () => {
-  const { shiftList = [] } = useContext(ShiftContext);
-  let groupedData = groupBy(shiftList, "startTime", "endTime");
+const AvailableShifts = (props) => {
+  const noData = <div className="noData">{"No Data"}</div>;
+  const { shiftList = [] } = props.parentProps;
+  const { date = "", location = "" } = props.filterValues;
+  let groupedByTime = groupByTime(shiftList, "startTime", "endTime");
+
   const groupedShiftDetails = (data = []) => {
     return (
       <ul className="list-group list-group-flush">
-        {data.map((data, index) => {
-          return data ? (
-            <ShiftDetails shiftData={data} key={index} isStatusRequired />
+        {data.map((shiftObj, index) => {
+          return shiftObj ? (
+            <ShiftDetails
+              shiftData={shiftObj}
+              key={index}
+              parentProps={props.parentProps}
+              isStatusRequired
+            />
           ) : null;
         })}
       </ul>
     );
   };
-  const component = () => {
-    let obj = shiftList.length ? (
-      Object.keys(groupedData).map((shiftDate, index) => {
-        return (
-          <React.Fragment key={index}>
-            <div className="card-header headerInfo">{shiftDate}</div>
-            {groupedShiftDetails(sortArray(groupedData[shiftDate]))}
-          </React.Fragment>
-        );
-      })
-    ) : (
-      <div className="card-header headerInfo">{"No Data"}</div>
+
+  const headerHideShowToggle = (event) => {
+    const element = document.getElementById(event.target.id);
+    if (element && element.nextElementSibling.hidden)
+      element.nextElementSibling.hidden = false;
+    else element.nextElementSibling.hidden = true;
+  };
+
+  const header = (index, shiftDate, filteredList) => {
+    return (
+      <React.Fragment key={index}>
+        <div
+          id={`availableHeader${index}`}
+          className="card-header headerInfo"
+          onClick={(e) => headerHideShowToggle(e)}
+        >
+          {shiftDate}
+        </div>
+        {groupedShiftDetails(sortArray(filteredList))}
+      </React.Fragment>
     );
-    return obj;
+  };
+
+  const helperFunction = (index, shiftDate) => {
+    let groupData = groupedByTime[shiftDate];
+    if (location) {
+      let filteredList =
+        location &&
+        groupData &&
+        groupData.filter((data) => data.area === location);
+      return filteredList && filteredList.length
+        ? header(index, shiftDate, filteredList)
+        : null;
+    } else return header(index, shiftDate, groupData);
+  };
+
+  const component = () => {
+    let obj = shiftList.length
+      ? date
+        ? helperFunction(0, date)
+        : Object.keys(groupedByTime).map((shiftDate, index) => {
+            return helperFunction(index, shiftDate);
+          })
+      : noData;
+    return obj ? obj : noData;
   };
   return component();
 };

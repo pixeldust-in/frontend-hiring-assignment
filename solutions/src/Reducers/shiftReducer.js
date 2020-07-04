@@ -22,7 +22,7 @@ const shiftReducer = (state = {}, action) => {
     case ERROR_SHIFT:
       return {
         ...state,
-        errorShift: action.payload.data,
+        errorShift: action.payload,
       };
     default:
       return state;

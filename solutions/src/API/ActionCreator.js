@@ -17,6 +17,7 @@ export const getShiftDetails = (callback) => {
         callback();
       })
       .catch((error) => {
+        alert(error);
         dispatch(data(ActionTypes.ERROR_SHIFT, error));
         callback();
       });
@@ -30,7 +31,8 @@ export const bookShift = (shiftId) => {
         dispatch(data(ActionTypes.BOOk_SHIFT, response.data));
       })
       .catch((error) => {
-        dispatch(data(ActionTypes.ERROR_SHIFT, error));
+        alert(error.response.data.message);
+        dispatch(data(ActionTypes.ERROR_SHIFT, error.response.data.message));
       });
   };
 };
@@ -42,6 +44,7 @@ export const cancelShift = (shiftId) => {
         dispatch(data(ActionTypes.CANCEL_SHIFT, response.data));
       })
       .catch((error) => {
+        alert(error.response.data.message);
         dispatch(data(ActionTypes.ERROR_SHIFT, error));
       });
   };
