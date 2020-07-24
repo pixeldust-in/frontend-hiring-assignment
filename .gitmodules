@@ -1,0 +1,3 @@
+[submodule "solutions/shift-booking-app"]
+	path = solutions/shift-booking-app
+	url = https://github.com/nehabharati/shift-booking-app.git
