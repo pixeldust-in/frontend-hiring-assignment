@@ -1,0 +1,19 @@
+.row {
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-item {
+  display: flex;
+  align-items: center;
+}
+
+.main{
+  display: flex;
+  width: 80%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  flex-direction: column;
+}
