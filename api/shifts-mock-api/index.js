@@ -55,10 +55,8 @@ const routes = [
 
       const allShifts = await db.shifts.list();
       const overlappingShiftExists = !!allShifts
-        .filter((s) => s.booked)
-        .find(
-          (s) => s.startTime < shift.endTime && s.endTime > shift.startTime
-        );
+        .filter(s => s.booked)
+        .find(s => s.startTime < shift.endTime && s.endTime > shift.startTime);
 
       if (overlappingShiftExists) {
         throw Boom.badRequest('Cannot book an overlapping shift');
@@ -74,9 +72,6 @@ const routes = [
         params: {
           id: Joi.string().required(),
         },
-      },
-      cors: {
-        origin: ['*'],
       },
     },
   },
