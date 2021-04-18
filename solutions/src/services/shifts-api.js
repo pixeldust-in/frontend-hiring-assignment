@@ -4,6 +4,7 @@ import axios from 'axios';
 export const shiftService = {
   getShifts,
   bookShifts,
+  cancelShift
 };
 
 async function getShifts() {
@@ -22,18 +23,26 @@ async function getShifts() {
 async function bookShifts(shift) {
   let url = config.urls.BOOK_SHIFT.replace('**', shift.id);
   return new Promise((resolve, reject) => {
-    const options = {
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      date: shift,
-      url,
-    };
-    axios(options)
-      .post()
+    axios
+      .post(url, shift)
       .then(function (response) {
-        console.log(response);
+        resolve(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        reject(error.response.data.message.toString());
+      });
+  });
+}
+async function cancelShift(shift) {
+  let url = config.urls.CANCEL_SHIFT.replace('**', shift.id);
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, shift)
+      .then(function (response) {
+        resolve(response.data);
+      })
+      .catch(function (error) {
+        reject(error.response.data.message.toString());
       });
   });
 }

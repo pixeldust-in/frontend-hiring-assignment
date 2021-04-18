@@ -5,9 +5,7 @@ const constants = {
     BASE_URL,
     GET_SHIFTS: BASE_URL + 'shifts',
     BOOK_SHIFT: BASE_URL + 'shifts/**/book',
-  },
-  constants: {
-    XYZ: 'EXAMPLE',
+    CANCEL_SHIFT: BASE_URL + 'shifts/**/cancel',
   },
 };
 export const config = constants;

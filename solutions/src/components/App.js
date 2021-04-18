@@ -1,15 +1,14 @@
 import React from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MyShifts from './MyShifts';
 import AvailableShifts from './AvailableShifts';
 import { Grid } from '@material-ui/core';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
-
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import './styles.css';
 
 function App() {
   const [value, setValue] = React.useState(0);
@@ -30,7 +29,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid style={{ margin: '20px' }}>
+      <Grid className="main">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -41,7 +40,7 @@ function App() {
         </Tabs>
 
         <TabPanel value={value} index={0}>
-          <MyShifts />
+          <MyShifts setValue={setValue} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <AvailableShifts />
@@ -62,11 +61,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box>{children}</Box>}
     </Grid>
   );
 }
