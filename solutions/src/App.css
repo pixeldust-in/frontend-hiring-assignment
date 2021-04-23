@@ -1,0 +1,44 @@
+body {
+  background-color: #F7F8F8;
+}
+
+
+.tabs {
+  border: none;
+}
+
+.tabs .nav-tabs .nav-link.active {
+  font-size: 16px;
+  color: #004FB4;
+  opacity: 0.5;
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+}
+
+.tab {
+  font-size: 20px;
+  color: #004FB4;
+  opacity: 0.5;
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+}
+
+.tab:hover {
+  border: none;
+}
+
+.tabs .tab.active {
+  opacity: 1;
+  border: none;
+  color: #004FB4;
+  background-color: inherit !important;
+}
+
+.card {
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+
