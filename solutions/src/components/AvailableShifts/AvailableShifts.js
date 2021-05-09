@@ -1,24 +1,29 @@
-import React , { useState, useEffect } from 'react'
+import React , { useState, useEffect, useContext } from 'react'
 import { groupBy } from '../../util/util'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
-import ShowList from '../ShowList/ShowList'
+import ShowList from '../ShiftList/ShiftList'
+import { ShiftContext } from '../../context/GlobalState'
+import cls from './AvailableShifts.module.css'
 
 const AvailableShifts = (props) => {
+    const { shifts } = useContext(ShiftContext)
     const [grouped, setGrouped] = useState({})
 
     useEffect(() => {
-        let groupedShifts = groupBy([...props.shifts], 'area')
+        let groupedShifts = groupBy([...shifts], 'area')
         setGrouped(groupedShifts)
-    }, [props.shifts])
+    }, [shifts])
 
     return (
-        <div className="box">
-            <Tabs defaultActiveKey="Helsinki" className="justify-content-center">
+        <div className={cls['box']}>
+            <Tabs defaultActiveKey="Helsinki" className={[cls['nav-tabs'], "justify-content-between"].join(' ')}>
             {
                 Object.keys(grouped).map((shift, index) => (
-                    <Tab eventKey={shift} key={`${shift}_${index}`} title={`${shift} (${grouped[shift].length})`}>
-                        <ShowList shifts={grouped[shift]} handleBooking={props.handleBooking}/>
+                    <Tab className={[cls['nav-tab']].join(' ')} 
+                        eventKey={shift} key={`${shift}_${index}`} 
+                        title={`${shift} (${grouped[shift].length})`}>
+                        <ShowList shifts={grouped[shift]} type="AvailableShifts" />
                     </Tab>
                 ))
             }

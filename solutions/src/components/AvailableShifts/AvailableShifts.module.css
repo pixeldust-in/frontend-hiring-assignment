@@ -1,3 +1,14 @@
 .box {
     background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 3px 3px 20px -5px rgb(0 0 0 / 40%);
+}
+
+.nav-tabs {
+    border: none;
+    padding: 10px;
+}
+
+.nav-tabs a{
+    color: #a4b8d3;
 }

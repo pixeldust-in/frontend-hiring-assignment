@@ -1,14 +1,16 @@
-import React from 'react'
-import ShowList from '../ShowList/ShowList'
+import React, { useContext } from 'react'
+import { ShiftContext } from '../../context/GlobalState'
+import ShowList from '../ShiftList/ShiftList'
+import cls from './MyShifts.module.css'
 
 const MyShifts = (props) => {
 
+    const { myShifts } = useContext(ShiftContext)
+
     return (
-        <div  className="box">
+        <div className={cls["box"]}>
             {
-                <ShowList shifts={props.shifts} 
-                    cancelBooking={props.cancelBooking} 
-                    handleBooking={props.handleBooking}/>
+                <ShowList shifts={myShifts} type="MyShifts" />
             }
         </div>
     )

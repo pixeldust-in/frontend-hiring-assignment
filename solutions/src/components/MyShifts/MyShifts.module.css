@@ -1,3 +1,5 @@
 .box {
     background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 3px 3px 20px -5px rgb(0 0 0 / 40%);
 }

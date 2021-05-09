@@ -41,4 +41,60 @@ body {
   background-color: #fff;
 }
 
+.nav-tabs .nav-link {
+  margin-bottom: unset;
+  border: unset;
+}
+
+.nav-tabs .nav-item.show .nav-link, 
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:focus, 
+.nav-tabs .nav-link:hover {
+  border: none;
+  color: #004fb4;
+}
+
+.bg-bluish-gray {
+  background-color: #f1f4f8;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.f-blue {
+  color: #4f6c92;
+}
+
+.f-red {
+  color: #e2006a;
+}
+
+.border-bottom {
+  border-bottom: 1px solid;
+}
+
+.book-btn {
+  border-radius: 30px;
+  padding: 5px 2rem;
+  color: #16a64d;
+  border: 1px solid #55cb82;
+  font-weight: bold;
+  background-color: #fff;
+}
+
+.book-btn:disabled {
+  opacity: 0.5;
+}
+
+.cancel-btn {
+  border-radius: 30px;
+  padding: 5px 2rem;
+  color: #e2006a;
+  border: 1px solid #fe93b3;
+  font-weight: bold;
+  background-color: #fff;
+}
+
+
 
