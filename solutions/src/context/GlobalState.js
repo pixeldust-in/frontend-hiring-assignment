@@ -23,29 +23,40 @@ export const ShiftContextProvider = ({ children }) => {
         })
       }
 
-      const handleBooking = async (e) => {
-        e.preventDefault()
-        let id = e.target.dataset.id
-        await axios({
-            url: `http://localhost:8080/shifts/${id}/book`,
-            method: 'POST',
-        })
-        bookMyShift(id)
+      const addBooking = async (id) => {
+        try {
+            const resp = await axios({
+                url: `http://localhost:8080/shifts/${id}/book`,
+                method: 'POST',
+            })
+            bookMyShift(id)
+            return true
+        } catch (err) {
+            console.error(err)
+            return false
+        }
+        
+        
     }
   
-    const cancelBooking = async (e) => {
-      e.preventDefault()
-      let id = e.target.dataset.id
-      await axios({
-        url: `http://localhost:8080/shifts/${id}/cancel`,
-        method: 'POST'
-      })
-      cancelShift(id)
+    const cancelBooking = async (id) => {
+      try {
+        const resp = await axios({
+            url: `http://localhost:8080/shifts/${id}/cancel`,
+            method: 'POST'
+        })
+        cancelShift(id)
+        return true
+      } catch (err) {
+        console.error(err)
+        return false
+      }
+      
     }
     
-      useEffect(() => {
-          fetchShifts()
-      }, [])
+    useEffect(() => {
+        fetchShifts()
+    }, [])
 
     function addShift(myShifts) {
         dispatch({
@@ -80,7 +91,7 @@ export const ShiftContextProvider = ({ children }) => {
             myShifts: state.myShifts,
             shifts: state.shifts,
             dispatch,
-            handleBooking,
+            addBooking,
             cancelBooking
         }}>
             { children }
