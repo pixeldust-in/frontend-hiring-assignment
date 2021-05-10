@@ -26,24 +26,38 @@ const Shift = (props) => {
     return false
   }
 
+  const timeStarted = (time) => {
+    let datetime = new Date(time)
+    let now = new Date()
+
+    return now > datetime
+
+  }
+
   const handleCancelBooking = async (e) => {
     e.preventDefault()
     setLoading(true)
     let id = e.target.dataset.id
-    const resp = await cancelBooking(id)
-    if (resp) {
-      setLoading(false)
-    } 
+    try {
+      const resp = await cancelBooking(id)
+    } catch (err) {
+
+    }
+    
+    setLoading(false)
   }
 
   const handleBooking = async (e) => {
     e.preventDefault()
     setLoading(true)
     let id = e.target.dataset.id
-    const resp = await addBooking(id)
-    if (resp) {
-      setLoading(false)
+    try {
+      const resp = await addBooking(id)
+    } catch (err) {
+      
     }
+    
+    setLoading(false)
   }
 
   return (
@@ -52,7 +66,9 @@ const Shift = (props) => {
         sh['booked'] ? (
           <div className="d-flex justify-content-between align-items-center">
             <div className="mx-3 f-blue text-bold">Booked</div>
-            <button className="cancel-btn" data-id={sh['id']} type="button" onClick={handleCancelBooking}>
+            <button className="cancel-btn" data-id={sh['id']} type="button" 
+              disabled={timeStarted(sh['startTime'])}
+              onClick={handleCancelBooking}>
               {
                 loading ? (
                   <SpinnerRed />
@@ -73,7 +89,7 @@ const Shift = (props) => {
             }
 
             <button className="book-btn" data-id={sh['id']} type="button"
-              disabled={overlapping(sh['startTime'])}
+              disabled={overlapping(sh['startTime']) || timeStarted(sh['startTime'])}
               onClick={handleBooking}>
               {
                 loading ? (

@@ -96,5 +96,9 @@ body {
   background-color: #fff;
 }
 
+.cancel-btn:disabled {
+  opacity: 0.5;
+}
+
 
 

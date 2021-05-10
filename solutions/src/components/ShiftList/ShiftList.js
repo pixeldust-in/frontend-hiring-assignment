@@ -17,19 +17,6 @@ function ShowList(props) {
     return acc
   }, {})
 
-  // const overlapping = (time) => {
-  //   let datetime = new Date(time)
-
-  //   for (let shift of myShifts) {
-  //     let startTime = new Date(shift['startTime'])
-  //     let endTime = new Date(shift['endTime'])
-  //     if (datetime >= startTime && datetime <= endTime) {
-  //       return true
-  //     }
-  //   }
-  //   return false
-  // }
-
   return (
     <div className="">
       {

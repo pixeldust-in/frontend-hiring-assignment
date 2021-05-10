@@ -14,7 +14,7 @@ export const ShiftContextProvider = ({ children }) => {
 
     const fetchShifts = () => {
         axios({
-          url: 'http://localhost:8080/shifts',
+          url: `${process.env.REACT_APP_API_ENDPOINT}/shifts`,
           method: 'GET'
         })
         .then(resp => {
@@ -26,14 +26,13 @@ export const ShiftContextProvider = ({ children }) => {
       const addBooking = async (id) => {
         try {
             const resp = await axios({
-                url: `http://localhost:8080/shifts/${id}/book`,
+                url: `${process.env.REACT_APP_API_ENDPOINT}/shifts/${id}/book`,
                 method: 'POST',
             })
             bookMyShift(id)
-            return true
+            return resp.data
         } catch (err) {
-            console.error(err)
-            return false
+            throw new Error(err)
         }
         
         
@@ -42,14 +41,13 @@ export const ShiftContextProvider = ({ children }) => {
     const cancelBooking = async (id) => {
       try {
         const resp = await axios({
-            url: `http://localhost:8080/shifts/${id}/cancel`,
+            url: `${process.env.REACT_APP_API_ENDPOINT}/shifts/${id}/cancel`,
             method: 'POST'
         })
         cancelShift(id)
-        return true
+        return resp.data
       } catch (err) {
-        console.error(err)
-        return false
+        throw new Error(err)
       }
       
     }
