@@ -1,0 +1,151 @@
+.App{
+  width: 50%;
+  padding: 50px;
+  margin: auto;
+}
+
+.table-div{
+
+  margin-top: 20px;
+  font-size: 16px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+}
+
+.table-div .my-shifts .header:first-child {
+    border-radius: 5px 5px 0 0; 
+}
+
+.table-div .my-shifts:last-child .table-r:last-child {
+    border-radius: 0 0 5px 5px; 
+}
+
+.header{
+
+  background: #F1F4F8;
+  padding: .75rem;
+  vertical-align: top;
+  border: 1px solid #CBD2E1;
+  color: #4F6C92;
+  font-weight: bold;
+  padding-left: 15px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+
+}
+
+.header span{
+
+  color: #A4B8D3;
+  margin-left: 10px;
+  font-weight: normal;
+
+}
+
+.table-r{
+  background: white;
+  border: 1px solid #CBD2E1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.table-row{
+  display: inline-table;
+}
+
+.table-row p:first-child {
+  color: #4F6C92;
+  margin-bottom: 0.25rem;
+}
+
+.table-row p:last-child {
+  color: #A4B8D3;
+  margin-top: 0;
+}
+
+.table-r button{
+  background: none;
+  border-radius: 2rem;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  width: 7rem;
+  cursor: pointer;
+}
+
+.available-shifts .table-row p:first-child {
+  color: #4F6C92;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.booked {
+  margin-right: 20px;
+  color: #4F6C92;
+  font-weight: bold;
+}
+
+.overlapped {
+  margin-right: 20px;
+  color: #E2006A;
+  font-weight: bold;
+}
+
+svg{
+  width: 45px;
+  height: 20px;
+}
+
+.filter{
+
+  border-radius: 5px 5px 0 0; 
+  background: white;
+  border: 1px solid #CBD2E1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+}
+
+/* Button */
+.btn{
+  color: #A4B8D3;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.btn-active{
+  color: #004FB4;
+}
+
+.btn-book{
+  color: #16A64D;
+  border: 1px solid #55CB82;
+}
+
+.btn-book:disabled{
+  color: #CAEFD8;
+  border: 1px solid #CAEFD8;
+}
+
+.btn-cancel{
+  color: #E2006A;
+  border: 1px solid #FE93B3;
+}
+
+.btn-cancel:disabled{
+  color: #EED2DF;
+  border: 1px solid #EED2DF;
+}
+
+.btn-spin{
+  padding: 0.5rem 2rem !important;
+}
