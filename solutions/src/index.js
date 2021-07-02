@@ -10,8 +10,11 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 import shiftApp from "./store/reducer";
-
-const store = createStore(shiftApp, applyMiddleware(thunk));
+import { composeWithDevTools } from "redux-devtools-extension";
+const store = createStore(
+  shiftApp,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 store.subscribe(() => console.log("Store Subscribed"));
 
